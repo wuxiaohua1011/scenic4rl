@@ -2,11 +2,11 @@ from scenic.simulators.gfootball import rl_interface
 from scenic.simulators.gfootball.rl_interface import GFScenicEnv
 
 import os
+
 cwd = os.getcwd()
 
-
 tracedir = f"vids"
-rewards = "scoring"#'scoring,checkpoints'
+rewards = "scoring"  # 'scoring,checkpoints'
 """
 gf_env_settings = {
     "stacked": True,
@@ -32,51 +32,52 @@ gf_env_settings = {
     "real_time": True
 }
 
-
 # scenario_file = f"/Users//codebase/scenic/training/gfrl/_scenarios/attack/cross_hard_no_gk.scenic"
 
 n_episode = 100
 
-files  = [f"/Users//codebase/scenic/training/gfrl/_scenarios/testing_generalization/defense_3vs3_cross_from_side_new.scenic"]
+files = [f"/home/michael/Desktop/projects/scenic4rl/training/gfrl/_scenarios/custom/stick_with_ball.scenic"]
 res = ""
 for scenario_file in files:
 
     # scenario_file = f"/Users//codebase/scenic/training/gfrl/_scenarios/dev/test.scenic"
     from scenic.simulators.gfootball.utilities.scenic_helper import buildScenario
+
     scenario = buildScenario(scenario_file)
 
-    #env = GFScenicEnv(initial_scenario=scenario, gf_env_settings=gf_env_settings)
+    # env = GFScenicEnv(initial_scenario=scenario, gf_env_settings=gf_env_settings)
 
     from scenic.simulators.gfootball.rl.gfScenicEnv_v1 import GFScenicEnv_v1
     from scenic.simulators.gfootball.rl.gfScenicEnv_v2 import GFScenicEnv_v2
-    #env = GFScenicEnv_v1(initial_scenario=scenario, gf_env_settings=gf_env_settings, allow_render=True, compute_scenic_behavior=True)
 
-    env = GFScenicEnv_v2(initial_scenario=scenario, gf_env_settings=gf_env_settings, allow_render=False)
+    # env = GFScenicEnv_v1(initial_scenario=scenario, gf_env_settings=gf_env_settings, allow_render=True, compute_scenic_behavior=True)
+
+    env = GFScenicEnv_v2(initial_scenario=scenario, gf_env_settings=gf_env_settings, allow_render=True)
 
     import gfootball
 
-    #env = gfootball.env.create_environment("academy_pass_and_shoot_with_keeper", number_of_left_players_agent_controls=1, render=False, representation="extracted",
+    # env = gfootball.env.create_environment("academy_pass_and_shoot_with_keeper", number_of_left_players_agent_controls=1, render=False, representation="extracted",
     #                                                   rewards=rewards, stacked=True, write_video=True, write_full_episode_dumps=True, logdir=tracedir)
-    rews =  []
-
+    rews = []
 
     for _ in range(n_episode):
         env.reset()
         rew = 0
-        #input("Press Any Key to Continue")
+        # input("Press Any Key to Continue")
         done = False
 
         while not done:
             action = env.action_space.sample()
-            #action = env.simulation.get_scenic_designated_player_action()
-            _,r,done,_ = env.step(action)
-            #input("")
-            rew+=r
+            # action = env.simulation.get_scenic_designated_player_action()
+            _, r, done, _ = env.step(action)
+            # input("")
+            rew += r
         print(rew)
         rews.append(rew)
 
     import numpy as np
-    rews  = np.array(rews)
+
+    rews = np.array(rews)
 
     s = f"{scenario_file}, {np.mean(rews)}, {rews.shape[0]}\n"
     print(s)
