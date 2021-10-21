@@ -41,7 +41,6 @@ behavior rightLMBehavior():
 	destinationPoint = Point on rightLM_AttackRegion
 	do MoveToPosition(destinationPoint)
 	do HighPassTo(right_RightMid)
-
 	do HoldPosition()
 
 behavior rightMBehavior(destinationPoint):
@@ -61,3 +60,11 @@ LeftGK with behavior HoldPosition()
 leftLB = LeftLB on leftLeftBackRegion
 leftCB = LeftCB on leftCenterBackRegion
 leftRB = LeftRM on leftRightMidRegion
+
+
+
+
+
+
+
+
