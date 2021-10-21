@@ -1,7 +1,7 @@
 from scenic.simulators.gfootball.model import *
 from scenic.simulators.gfootball.behaviors import *
+from scenic.simulators.gfootball.actions import *
 from scenic.simulators.gfootball.simulator import GFootBallSimulator
-ds = simulation().game_ds
 param game_duration = 400
 param deterministic = False
 param offsides = False
@@ -21,12 +21,14 @@ behavior PassOrDefault(point):
             take BuiltinAIAction()
 
 behavior FollowPersonWithBall(ball):
+    ds = simulation().game_ds
+
     while True:
-        player_with_ball = player_with_ball(ds, ball, team=1)
-        if player_with_ball is  self or player_with_ball is  None:
+        p = player_with_ball(ds, ball, team=1)
+        if p is  self or p is  None:
             take BuiltinAIAction()
         else:
-            take MoveTowardsPoint(player_with_ball.position, self.position, rightTeam=True)
+            take MoveTowardsPoint(p.position, self.position, rightTeam=True)
 
 # ----- Regions -----
 
@@ -48,4 +50,4 @@ ball = Ball ahead of p1 by 2
 
 # Right
 o0 = RightGK with behavior HoldPosition()
-o1 = RightPlayer with role "RB", at o1_spawn, with behavior FollowPersonWithBall()
+o1 = RightPlayer with role "RB", at o1_spawn, with behavior FollowPersonWithBall(ball)
