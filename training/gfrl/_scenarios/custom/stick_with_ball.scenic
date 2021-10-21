@@ -18,12 +18,12 @@ behavior PassOrDefault(point):
             take Pass()
             take NoAction()
         else:
-            take BuiltinAIAction()
+            take NoAction()
 
 behavior FollowObj(obj):
     while True:
         if self.owns_ball:
-            take BuiltinAIAction()
+            take NoAction()
         else:
             take MoveTowardsPoint(ball.position, self.position, rightTeam=True)
 
@@ -37,9 +37,9 @@ o1_spawn = 74 @ 0
 
 # ----- Players -----
 ego = LeftGK with behavior HoldPosition()
-p1 = LeftPlayer with role "LM", at p1_spawn, with behavior PassOrDefault(p1_spawn)
-p3 = LeftPlayer with role "RM", at p3_spawn, with behavior PassOrDefault(p2_spawn)
-p2 = LeftPlayer with role "RM", at p2_spawn, with behavior PassOrDefault(p3_spawn)
+p1 = LeftPlayer with role "LM", at p1_spawn#, with behavior PassOrDefault(p1_spawn)
+p3 = LeftPlayer with role "RM", at p3_spawn#, with behavior PassOrDefault(p2_spawn)
+p2 = LeftPlayer with role "RM", at p2_spawn#, with behavior PassOrDefault(p3_spawn)
 
 # ball
 ball = Ball ahead of p1 by 2
