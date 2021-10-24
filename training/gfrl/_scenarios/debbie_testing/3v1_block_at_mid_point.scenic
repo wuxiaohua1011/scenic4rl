@@ -40,12 +40,13 @@ behavior goToMidPoint():
         mid_y = (closest_opp_to_self.y + closest_opp_to_owner.y) / 2
         print("Got the midpoint of the opponent closest to the ball owner and the opponent closest to self")
 
-        do MoveToPosition(mid_x @ mid_y)
-        print("d1")
-        print("d2")
+        mid_x_range = mid_x + Range(-5,5)
+        mid_y_range = mid_y + Range(-5,5)
+        do MoveToPosition(mid_x_range @ mid_y_range)
+        print("Moving to midpoint")
         if (distance from self to ball) < 2:
-            do AimGoalCornerAndShoot()
-            print("d3")
+            do dribbleToAndShoot(Point on opponent_goal)
+            print("Dribbled")
             break
     do HoldPosition()
 
@@ -54,25 +55,22 @@ behavior goToMidPoint():
 # ----- Regions -----
 
 # for offside rule
-pass_zone = get_reg_from_edges(70, 76, -3, 3)
-p1_spawn = 70 @ 3
-p2_spawn = 70 @ -3
-p3_spawn = 76 @ -3
-o1_spawn = 74 @ 0
-corner = 80 @ 3
+p1_spawn = get_reg_from_edges(230, 30, 10, -10)
+o0_spawn = get_reg_from_edges(100, 98, 2, -2)
+opponent_goal = get_reg_from_edges(-100, -98, 2, -2)
 # ----- Players -----
 # Left
-ego = LeftGK with behavior HoldPosition()
+ego = LeftGK with behavior HoldPosition(), on opponent_goal
 
-p1 = LeftPlayer with role "LM", at p1_spawn
-p3 = LeftPlayer with role "RM", at p3_spawn
-p2 = LeftPlayer with role "RM", at p2_spawn
+p1 = LeftPlayer with role "AM", on p1_spawn
+p3 = LeftPlayer with role "AM", right of p1 by 10
+p2 = LeftPlayer with role "AM", ahead of p1 by 10
 
-p4 = LeftPlayer with role "LM", at 60 @ 8, with behavior serverBehavior()
+p4 = LeftPlayer with role "AM", left of p1 by 20, with behavior serverBehavior()
 
 # Right
-o0 = RightGK #with behavior HoldPosition()
-o1 = RightPlayer at o1_spawn, with behavior goToMidPoint()
+o0 = RightGK on o0_spawn
+o1 = RightPlayer right of p2 by 10, with behavior goToMidPoint()
 
 # Ball
 ball = Ball right of p4 by 2

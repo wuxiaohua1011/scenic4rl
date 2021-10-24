@@ -33,33 +33,32 @@ behavior helpGK():
         if (distance from o0 to self) < 5:
             break
     while True:
-        do FollowObject(ball, 0, True)
+        if self.owns_ball:
+            do dribbleToAndShoot(Point on opponent_goal)
+        else:
+            take MoveTowardsPoint(ball.position, self.position, rightTeam=True)
 
 
 
 # ----- Regions -----
 
 # for offside rule
-pass_zone = get_reg_from_edges(70, 76, -3, 3)
-p1_spawn = 70 @ 3
-p2_spawn = 70 @ -3
-p3_spawn = 76 @ -3
-o1_spawn = 74 @ 0
+p1_spawn = get_reg_from_edges(230, 30, 10, -10)
 o0_spawn = get_reg_from_edges(100, 98, 2, -2)
-corner = 80 @ 3
+opponent_goal = get_reg_from_edges(-100, -98, 2, -2)
 # ----- Players -----
 # Left
 ego = LeftGK with behavior HoldPosition()
 
-p1 = LeftPlayer with role "LM", at p1_spawn
-p3 = LeftPlayer with role "RM", at p3_spawn
-p2 = LeftPlayer with role "RM", at p2_spawn
+p1 = LeftPlayer with role "AM", on p1_spawn
+p3 = LeftPlayer with role "AM", right of p1 by 10
+p2 = LeftPlayer with role "AM", ahead of p1 by 10
 
-p4 = LeftPlayer with role "LM", at 60 @ 8, with behavior serverBehavior()
+p4 = LeftPlayer with role "AM", left of p1 by 20, with behavior serverBehavior()
 
 # Right
 o0 = RightGK on o0_spawn
-o1 = RightPlayer at o1_spawn, with behavior helpGK()
+o1 = RightPlayer right of p2 by 10, with behavior helpGK()
 
 # Ball
 ball = Ball right of p4 by 2
