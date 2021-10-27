@@ -60,7 +60,7 @@ for scenario_file in files:
     #                                                   rewards=rewards, stacked=True, write_video=True, write_full_episode_dumps=True, logdir=tracedir)
     rews = []
 
-    for _ in range(n_episode):
+    for i in range(n_episode):
         env.reset()
         rew = 0
         # input("Press Any Key to Continue")
@@ -73,6 +73,7 @@ for scenario_file in files:
             # input("")
             rew += r
         print(rew)
+        print(f"num_episode = {i}")
         rews.append(rew)
 
     import numpy as np

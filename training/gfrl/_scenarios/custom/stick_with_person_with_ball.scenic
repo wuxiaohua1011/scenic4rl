@@ -33,21 +33,21 @@ behavior FollowPersonWithBall(ball):
 # ----- Regions -----
 
 # for offside rule
-p1_spawn = 68 @ 10
-p2_spawn = 68 @ -10
-p3_spawn = 76 @ -10
-o1_spawn = 74 @ 0
+p1_spawn = get_reg_from_edges(230, 30, 10, -10)
+p2_spawn =  get_reg_from_edges(230, 30, 0, -10)
+p3_spawn =  get_reg_from_edges(230, 60, 0, -10)
+o1_spawn = get_reg_from_edges(100, 98, 2, -2)
 
 # ----- Players -----
 ego = LeftGK with behavior HoldPosition()
-p1 = LeftPlayer with role "LM", at p1_spawn#, with behavior PassOrDefault(p1_spawn)
-p3 = LeftPlayer with role "RM", at p3_spawn#, with behavior PassOrDefault(p2_spawn)
-p2 = LeftPlayer with role "RM", at p2_spawn#, with behavior PassOrDefault(p3_spawn)
+p1 = LeftPlayer with role "LM", on p1_spawn#, with behavior PassOrDefault(p1_spawn)
+p2 = LeftPlayer with role "RM", right of p1 by 20  # , with behavior PassOrDefault(p3_spawn)
+p3 = LeftPlayer with role "RM", ahead of p1 by 20 #, with behavior PassOrDefault(p2_spawn)
 
 # ball
 ball = Ball ahead of p1 by 2
 
 
 # Right
-o0 = RightGK with behavior HoldPosition()
+o0 = RightGK with behavior Pass()
 o1 = RightPlayer with role "RB", at o1_spawn, with behavior FollowPersonWithBall(ball)
