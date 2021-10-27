@@ -36,7 +36,7 @@ gf_env_settings = {
 
 n_episode = 100
 
-files = [f"/home/michael/Desktop/projects/scenic4rl/training/gfrl/_scenarios/custom/stick_with_ball.scenic"]
+files = [f"/home/michael/Desktop/projects/scenic4rl/training/gfrl/_scenarios/custom/stick_with_person_with_ball.scenic"]
 res = ""
 for scenario_file in files:
 

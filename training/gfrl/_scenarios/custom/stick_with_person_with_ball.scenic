@@ -41,13 +41,13 @@ o1_spawn = get_reg_from_edges(100, 98, 2, -2)
 # ----- Players -----
 ego = LeftGK with behavior HoldPosition()
 p1 = LeftPlayer with role "LM", on p1_spawn#, with behavior PassOrDefault(p1_spawn)
-p2 = LeftPlayer with role "RM", right of p1 by 20  # , with behavior PassOrDefault(p3_spawn)
-p3 = LeftPlayer with role "RM", ahead of p1 by 20 #, with behavior PassOrDefault(p2_spawn)
+p3 = LeftPlayer with role "RM", right of p1 by 20#, with behavior PassOrDefault(p2_spawn)
+p2 = LeftPlayer with role "RM", ahead of p1 by 20#, with behavior PassOrDefault(p3_spawn)
 
 # ball
 ball = Ball ahead of p1 by 2
 
 
 # Right
-o0 = RightGK with behavior Pass()
-o1 = RightPlayer with role "RB", at o1_spawn, with behavior FollowPersonWithBall(ball)
+o0 = RightGK with behavior HoldPosition()
+o1 = RightPlayer with role "RB", on o1_spawn, with behavior FollowPersonWithBall(ball)
