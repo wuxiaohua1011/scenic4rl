@@ -6,24 +6,28 @@ import os
 cwd = os.getcwd()
 
 tracedir = f"vids"
-rewards = "scoring"  # 'scoring,checkpoints'
-"""
-gf_env_settings = {
-    "stacked": True,
-    "rewards": rewards,
-    "representation": 'extracted',
-    "players": [f"agent:left_players=1"],
-    "real_time": True,
-    "action_set": "default",
-    "dump_full_episodes": True,
-    "dump_scores": True,
-    "write_video": True,
-    "tracesdir": tracedir,
-    "write_full_episode_dumps": True,
-    "write_goal_dumps": True,
-    "render": True
-}
-"""
+# <<<<<<< HEAD
+# rewards = "scoring"  # 'scoring,checkpoints'
+# """
+# gf_env_settings = {
+#     "stacked": True,
+#     "rewards": rewards,
+#     "representation": 'extracted',
+#     "players": [f"agent:left_players=1"],
+#     "real_time": True,
+#     "action_set": "default",
+#     "dump_full_episodes": True,
+#     "dump_scores": True,
+#     "write_video": True,
+#     "tracesdir": tracedir,
+#     "write_full_episode_dumps": True,
+#     "write_goal_dumps": True,
+#     "render": True
+# }
+# """
+# =======
+rewards = "scoring"#'scoring,checkpoints'
+
 gf_env_settings = {
     "stacked": True,
     "rewards": 'scoring',
@@ -32,11 +36,10 @@ gf_env_settings = {
     "real_time": True
 }
 
-# scenario_file = f"/Users//codebase/scenic/training/gfrl/_scenarios/attack/cross_hard_no_gk.scenic"
 
 n_episode = 100
 
-files = [f"/home/michael/Desktop/projects/scenic4rl/training/gfrl/_scenarios/custom/stick_with_person_with_ball.scenic"]
+files  = [f"/home/michael/Desktop/projects/scenic4rl/training/gfrl/_scenarios/debbie_testing/3v1_4_behaviors.scenic"]
 res = ""
 for scenario_file in files:
 
@@ -51,6 +54,7 @@ for scenario_file in files:
     from scenic.simulators.gfootball.rl.gfScenicEnv_v2 import GFScenicEnv_v2
 
     # env = GFScenicEnv_v1(initial_scenario=scenario, gf_env_settings=gf_env_settings, allow_render=True, compute_scenic_behavior=True)
+
 
     env = GFScenicEnv_v2(initial_scenario=scenario, gf_env_settings=gf_env_settings, allow_render=True)
 
@@ -67,8 +71,8 @@ for scenario_file in files:
         done = False
 
         while not done:
-            action = env.action_space.sample()
-            # action = env.simulation.get_scenic_designated_player_action()
+            # action = env.action_space.sample()
+            action = env.simulation.get_scenic_designated_player_action()
             _, r, done, _ = env.step(action)
             # input("")
             rew += r
