@@ -80,7 +80,7 @@ behavior FollowPersonWithBall(ball):
 # ----- Regions -----
 
 # for offside rule
-p1_spawn = get_reg_from_edges(230, 30, 10, -10)
+p1_spawn = get_reg_from_edges(80, 50, 10, -10)
 o0_spawn = get_reg_from_edges(100, 98, 2, -2)
 opponent_goal = get_reg_from_edges(-100, -98, 2, -2)
 # ----- Players -----
