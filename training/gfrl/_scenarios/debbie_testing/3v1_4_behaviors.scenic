@@ -96,5 +96,5 @@ ball = Ball ahead of p1 by 2
 
 # Right
 o0 = RightGK on o0_spawn
-o1 = RightPlayer right of p2 by 20, with behavior Uniform(goToMidPoint(),helpGK(),FollowObj(ball),FollowPersonWithBall(ball))
+o1 = RightCB at (p1 offset along -1*Range(60,120) deg by 0 @ Range(10, 30)) , with behavior Uniform(goToMidPoint(),helpGK(),FollowObj(ball),FollowPersonWithBall(ball))
 
