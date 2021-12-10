@@ -11,8 +11,8 @@ param end_episode_on_possession_change = True
 p1_spawn = get_reg_from_edges(0, 20, 42, -42)
 o0_spawn = get_reg_from_edges(60, 80, 42, -42)
 
-ego = LeftPlayer with role "AM", on p1_spawn
+ego = LeftGK
+p1 = LeftPlayer with role "AM", on p1_spawn
 o0 = RightGK on o0_spawn
 
 ball = Ball ahead of p1 by 2
-
