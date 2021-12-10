@@ -66,7 +66,7 @@ class Scenario:
 				 monitors, behaviorNamespaces,
 				 dynamicScenario):
 		if workspace is None:
-			workspace = Workspace()		# default empty workspace
+			workspace = Workspace()	# default empty workspace
 		self.workspace = workspace
 		self.simulator = simulator		# simulator for dynamic scenarios
 		# make ego the first object, while otherwise preserving order
@@ -188,7 +188,8 @@ class Scenario:
 				if self.externalSampler is not None:
 					feedback = self.externalSampler.rejectionFeedback
 			if iterations >= maxIterations:
-				raise RejectionException(f'failed to generate scenario in {iterations} iterations')
+				# raise RejectionException(f'failed to generate scenario in {iterations} iterations')
+				return None, None
 			iterations += 1
 			try:
 				if self.externalSampler is not None:
