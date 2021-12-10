@@ -12,7 +12,7 @@ p1_spawn = 0 @ 40
 o0_spawn = 80 @ 0
 
 ego = LeftGK
-p1 = LeftPlayer with role "AM", on p1_spawn
-o0 = RightGK on o0_spawn
+p1 = LeftPlayer with role "AM", at p1_spawn
+o0 = RightGK at o0_spawn
 
 ball = Ball ahead of p1 by 2
